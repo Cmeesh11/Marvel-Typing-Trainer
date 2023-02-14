@@ -1,14 +1,38 @@
+// Variable Declaration
+var startButton = document.querySelector("#start-button");
+var body = document.querySelector("body");
+
+// Created Elements
+var textBox = document.createElement("div");
 
 var publicKey = "c80a5387467017b31f13477fc4481d74";
 
-// Fetching Marvel API
-fetch("https://gateway.marvel.com/v1/public/stories?apikey=" + publicKey)
-.then((response) => {
-  return response.json();
-})
-.then((data) => {
-  console.log(data);
-})
-.catch((error) => {
-  return console.error(error);
-})
+function startTraining() {
+  // Fetching Marvel API
+  fetch("https://gateway.marvel.com/v1/public/events?limit=50&apikey=" + publicKey)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      // Chooses a random description to display
+      var text = data.data.results[Math.floor(Math.random() * 49)].description;
+      // Clearing previous landing page HTML and replacing it with generated text
+      body.innerHTML = "";
+      // If text length is less than 500 characters, add another description
+      while (text.length < 500) {
+        text += " " + data.data.results[Math.floor(Math.random() * 49)].description;
+      }
+      // Styling textbox
+      textBox.setAttribute("class", "box has-text-centered");
+      // Setting textbox content to text
+      textBox.textContent = text;
+      // Appending textbox to body
+      body.appendChild(textBox);
+    })
+    .catch((error) => {
+      return console.error(error);
+    });
+}
+
+// Listens for button click
+startButton.addEventListener("click", startTraining);
