@@ -20,7 +20,7 @@ function startTraining() {
       // Clearing previous landing page HTML and replacing it with generated text
       container.innerHTML = "";
       // If text length is less than 500 characters, add another description
-      while (text.length < 5000) {
+      while (text.length < 500) {
         text += " " + data.data.results[Math.floor(Math.random() * 49)].description;
       }
       // Styling textbox
