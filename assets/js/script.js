@@ -14,6 +14,7 @@ function startTraining() {
       return response.json();
     })
     .then((data) => {
+      console.log(data);
       // Chooses a random description to display
       var text = data.data.results[Math.floor(Math.random() * 49)].description;
       // Clearing previous landing page HTML and replacing it with generated text
@@ -25,6 +26,8 @@ function startTraining() {
       // Styling textbox
       textBox.setAttribute("class", "box has-text-centered");
       // Setting textbox content to text
+      text = text.replace(/â€™/g, "'");
+      text = text.replace(/â€”/g, " ");
       textBox.textContent = text;
       // Appending textbox to body
       container.appendChild(textBox);
