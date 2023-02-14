@@ -14,17 +14,20 @@ function startTraining() {
       return response.json();
     })
     .then((data) => {
+      console.log(data);
       // Chooses a random description to display
       var text = data.data.results[Math.floor(Math.random() * 49)].description;
       // Clearing previous landing page HTML and replacing it with generated text
       container.innerHTML = "";
       // If text length is less than 500 characters, add another description
-      while (text.length < 500) {
+      while (text.length < 5000) {
         text += " " + data.data.results[Math.floor(Math.random() * 49)].description;
       }
       // Styling textbox
       textBox.setAttribute("class", "box has-text-centered");
       // Setting textbox content to text
+      text = text.replace(/â€™/g, "'");
+      text = text.replace(/â€”/g, " ");
       textBox.textContent = text;
       // Appending textbox to body
       container.appendChild(textBox);
