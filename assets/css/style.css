@@ -1,9 +1,20 @@
+:root {
+  --footer-height: 25px;
+}
+
 html,
 body {
+    height: 100%;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
-body > footer {
+footer {
+    height: 25px;
+    background-color: black;
     margin-top: auto;
+}
+
+main {
+  display: flex;
 }
