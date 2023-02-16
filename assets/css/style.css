@@ -8,6 +8,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #bcbcbc;
 }
 footer {
     height: 25px;
@@ -19,4 +20,8 @@ main {
     font-family: Verdana;
     font-size: larger;
     display: flex;
+}
+
+#marvel{
+  background-color: #F0131E;
 }
