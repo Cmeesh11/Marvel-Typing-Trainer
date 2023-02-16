@@ -52,7 +52,22 @@ function interactiveText(textEl) {
     spanLet.textContent = text[i];
     textBoxEl.appendChild(spanLet);
   }
+
 }
 
 // Listens for button click
 startButton.addEventListener("click", startTraining);
+
+// Listens for keypress
+window.addEventListener("keypress", (event) => {
+  console.log(event.key);
+  var passage = textBoxEl.querySelectorAll("span");
+   passage.forEach((span) => {
+     var charInput = event.key;
+     if (charInput === span.textContent) {
+       span.setAttribute("style", "background-color: lightgreen;");
+     } else {
+       span.setAttribute("style", "background-color: red;");
+     }
+   })
+ })
