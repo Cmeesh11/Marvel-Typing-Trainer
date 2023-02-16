@@ -27,7 +27,9 @@ function startTraining() {
           " " + data.data.results[Math.floor(Math.random() * 49)].description;
       }
       // Styling textbox
-      textBoxEl.setAttribute("class", "box has-text-centered");
+      textBox.setAttribute("class", "box has-text-centered");
+      textBox.setAttribute("style", "font-family: Courier New");
+
       // Setting textbox content to text
       text = text.replace(/â€™/g, "'");
       text = text.replace(/â€”/g, " ");
