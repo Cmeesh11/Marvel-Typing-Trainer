@@ -2,6 +2,7 @@
 var startButton = document.querySelector("#start-button");
 var body = document.querySelector("body");
 var container = document.querySelector("#container");
+var index;
 // Created Elements
 var textBoxEl = document.createElement("div");
 
@@ -16,20 +17,18 @@ function startTraining() {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       // Chooses a random description to display
       var text = data.data.results[Math.floor(Math.random() * 49)].description;
       // Clearing previous landing page HTML and replacing it with generated text
       container.innerHTML = "";
       // If text length is less than 500 characters, add another description
-      while (text.length < 500) {
+      while (text.length < 100) {
         text +=
           " " + data.data.results[Math.floor(Math.random() * 49)].description;
       }
       // Styling textbox
-      textBox.setAttribute("class", "box has-text-centered");
-      textBox.setAttribute("style", "font-family: Courier New");
-
+      textBoxEl.setAttribute("class", "box has-text-centered");
+      textBoxEl.setAttribute("style", "font-family: Courier New");
       // Setting textbox content to text
       text = text.replace(/â€™/g, "'");
       text = text.replace(/â€”/g, " ");
@@ -52,7 +51,64 @@ function interactiveText(textEl) {
     spanLet.textContent = text[i];
     textBoxEl.appendChild(spanLet);
   }
+  index = 0;
 }
+
+// Returns the accuracy of the user
+function getAccuracy() {
+  // Selects all spans in textboxEl with class "correct"
+  var correct = textBoxEl.querySelectorAll(".correct");
+  // Compares index to correctly entered characters and returns a percent
+  var accuracy = (correct.length / index) * 100 + "%"
+  return accuracy;
+}
+
+// Ends the session
+function doneTyping() {
+  textBoxEl.textContent = "Finished!"
+  console.log("done!");
+  
+}
+
+
 
 // Listens for button click
 startButton.addEventListener("click", startTraining);
+
+// Listens for keypress
+window.addEventListener("keypress", (event) => {
+  var charInput = event.key;
+  var passage = textBoxEl.querySelectorAll("span");
+  // Only runs when the textbox is on screen
+    // If user input character is the same as the current letter, turn green
+    if (charInput === passage[index].textContent) {
+      new Audio("./assets/sounds/keypress.mp3").play();
+      passage[index].classList.add("correct");
+    }  // If the wrong key is pressed, make color red
+    else {
+      new Audio("./assets/sounds/wronganswer.mp3").play();
+      passage[index].classList.add("incorrect");
+    }
+  if (index === passage.length - 1) {
+    return doneTyping();
+  }
+  index++;
+})
+
+// Listens for backspace
+window.addEventListener("keydown", (event) => {
+  var charInput = event.key;
+  var passage = textBoxEl.querySelectorAll("span");
+  // If the backspace key is pressed, go back one index and change color
+  if (charInput === "Backspace") {
+    // Prevents index from being negative
+    if (index > 0) {
+      new Audio("./assets/sounds/keypress.mp3").play();
+      // Moves index back a space
+      index--;
+      // Removes the background color from the character
+      passage[index].classList.remove("correct");
+      passage[index].classList.remove("incorrect");
+    }
+  }
+})

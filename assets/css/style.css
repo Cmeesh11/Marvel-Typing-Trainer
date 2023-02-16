@@ -25,3 +25,11 @@ main {
 #marvel{
   background-color: #F0131E;
 }
+
+.correct {
+  background-color: lightgreen;
+}
+
+.incorrect {
+  background-color: red;
+}
