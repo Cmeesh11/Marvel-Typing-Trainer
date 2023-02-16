@@ -25,6 +25,8 @@ function startTraining() {
       }
       // Styling textbox
       textBox.setAttribute("class", "box has-text-centered");
+      textBox.setAttribute("style", "font-family: Courier New");
+
       // Setting textbox content to text
       text = text.replace(/â€™/g, "'");
       text = text.replace(/â€”/g, " ");

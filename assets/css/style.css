@@ -16,5 +16,7 @@ footer {
 }
 
 main {
-  display: flex;
+    font-family: Verdana;
+    font-size: larger;
+    display: flex;
 }
