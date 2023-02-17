@@ -3,8 +3,12 @@ var startButton = document.querySelector("#start-button");
 var body = document.querySelector("body");
 var container = document.querySelector("#container");
 var index;
+var scoreBox = document.querySelector("#scores");
+var scoreButton = document.querySelector("#score-button");
 // Created Elements
 var textBoxEl = document.createElement("div");
+
+
 
 var publicKey = "c80a5387467017b31f13477fc4481d74";
 
@@ -62,15 +66,32 @@ function getAccuracy() {
   var accuracy = (correct.length / index) * 100 + "%"
   return accuracy;
 }
+//Function for the timer
+var seconds = 0
+function startTimer() {
+  var count = setInterval(function(){
+    seconds++;
+     }, 1000);
+}
 
-// Ends the session
-function doneTyping() {
-  textBoxEl.textContent = "Finished!"
-  console.log("done!");
-  
+function highScores(){
+  var scores = localStorage.getItem("Highscores")
+ 
+
 }
 
 
+// Ends the session
+function doneTyping() {
+  console.log("done!");
+  clearInterval(seconds)
+  textBoxEl.textContent = "Completed in " + seconds + " seconds! The Avengers would be proud!" 
+  localStorage.setItem("Highscores", seconds + " seconds")
+}
+
+
+//Starts timer on button click
+startButton.addEventListener("click", startTimer);
 
 // Listens for button click
 startButton.addEventListener("click", startTraining);
