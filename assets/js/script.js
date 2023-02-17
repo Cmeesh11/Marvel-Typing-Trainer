@@ -1,27 +1,33 @@
 // Variable Declaration
 var startButton = document.querySelector("#start-button");
+var avengersButton = document.querySelector("#avengers-button");
 var body = document.querySelector("body");
 var container = document.querySelector("#container");
 var index;
 // Created Elements
 var textBoxEl = document.createElement("div");
-
 var publicKey = "c80a5387467017b31f13477fc4481d74";
+var avengersMovies = [
+  "The+Avengers",
+  "Avengers+Age+of+Ultron",
+  "Avengers+Infinity+War",
+  "Avengers+Endgame",
+];
 
-function startTraining() {
-  // Fetching Marvel API
-  fetch(
-    "https://gateway.marvel.com/v1/public/events?limit=50&apikey=" + publicKey
+function startTrainingAvengers() {
+  return fetch(
+    "http://www.omdbapi.com/?apikey=6961e40c&t=" +
+      avengersMovies[Math.floor(Math.random() * 4)] +
+      "&type=movie&plot=full"
   )
     .then((response) => {
       return response.json();
     })
     .then((data) => {
-      // Chooses a random description to display
-      var text = data.data.results[Math.floor(Math.random() * 49)].description;
-      // Clearing previous landing page HTML and replacing it with generated text
+      console.log(data);
+      var text = data.Plot;
       container.innerHTML = "";
-      // If text length is less than 500 characters, add another description
+      // If text length is less than 100 characters, add another description
       while (text.length < 100) {
         text +=
           " " + data.data.results[Math.floor(Math.random() * 49)].description;
@@ -34,8 +40,37 @@ function startTraining() {
       text = text.replace(/â€”/g, " ");
       // Appending textbox to body
       container.appendChild(textBoxEl);
-      // Runs interactiveText function to make text interactive
-      interactiveText(text);
+      return text;
+    });
+}
+
+function startTraining() {
+  // Fetching Marvel API
+  return fetch(
+    "https://gateway.marvel.com/v1/public/events?limit=50&apikey=" + publicKey
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      // Chooses a random description to display
+      var text = data.data.results[Math.floor(Math.random() * 49)].description;
+      // Clearing previous landing page HTML and replacing it with generated text
+      container.innerHTML = "";
+      // If text length is less than 100 characters, add another description
+      while (text.length < 100) {
+        text +=
+          " " + data.data.results[Math.floor(Math.random() * 49)].description;
+      }
+      // Styling textbox
+      textBoxEl.setAttribute("class", "box has-text-centered");
+      textBoxEl.setAttribute("style", "font-family: Courier New");
+      // Setting textbox content to text
+      text = text.replace(/â€™/g, "'");
+      text = text.replace(/â€”/g, " ");
+      // Appending textbox to body
+      container.appendChild(textBoxEl);
+      return text;
     })
     .catch((error) => {
       return console.error(error);
@@ -53,47 +88,60 @@ function interactiveText(textEl) {
   }
   index = 0;
 }
-
 // Returns the accuracy of the user
 function getAccuracy() {
   // Selects all spans in textboxEl with class "correct"
   var correct = textBoxEl.querySelectorAll(".correct");
   // Compares index to correctly entered characters and returns a percent
-  var accuracy = (correct.length / index) * 100 + "%"
+  var accuracy = (correct.length / index) * 100 + "%";
   return accuracy;
 }
 
 // Ends the session
 function doneTyping() {
-  textBoxEl.textContent = "Finished!"
+  textBoxEl.textContent = "Finished!";
   console.log("done!");
-  
 }
 
+// Listens for comics button click
+startButton.addEventListener("click", function () {
+  // returns the promise to engText, then once fulfilled,
+  // runs the interactiveText function to make the text interactive
+  var text = startTraining();
+  text.then((resp) => {
+    interactiveText(resp);
+  });
+});
 
-
-// Listens for button click
-startButton.addEventListener("click", startTraining);
+// Listens for movies button click
+avengersButton.addEventListener("click", function () {
+  // returns the promise to engText, then once fulfilled,
+  // runs the interactiveText function to make the text interactive
+  var text = startTrainingAvengers();
+  text.then((resp) => {
+    interactiveText(resp);
+  });
+});
 
 // Listens for keypress
 window.addEventListener("keypress", (event) => {
   var charInput = event.key;
   var passage = textBoxEl.querySelectorAll("span");
   // Only runs when the textbox is on screen
-    // If user input character is the same as the current letter, turn green
-    if (charInput === passage[index].textContent) {
-      new Audio("./assets/sounds/keypress.mp3").play();
-      passage[index].classList.add("correct");
-    }  // If the wrong key is pressed, make color red
-    else {
-      new Audio("./assets/sounds/wronganswer.mp3").play();
-      passage[index].classList.add("incorrect");
-    }
+  // If user input character is the same as the current letter, turn green
+  if (charInput === passage[index].textContent) {
+    new Audio("./assets/sounds/keypress.mp3").play();
+    passage[index].classList.add("correct");
+  } // If the wrong key is pressed, make color red
+  else {
+    new Audio("./assets/sounds/wronganswer.mp3").play();
+    passage[index].classList.add("incorrect");
+  }
   if (index === passage.length - 1) {
     return doneTyping();
   }
   index++;
-})
+});
 
 // Listens for backspace
 window.addEventListener("keydown", (event) => {
@@ -111,4 +159,4 @@ window.addEventListener("keydown", (event) => {
       passage[index].classList.remove("incorrect");
     }
   }
-})
+});
