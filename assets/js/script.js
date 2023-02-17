@@ -84,7 +84,7 @@ function highScores(){
 // Ends the session
 function doneTyping() {
   console.log("done!");
-  clearInterval(seconds)
+  clearInterval(count)
   textBoxEl.textContent = "Completed in " + seconds + " seconds! The Avengers would be proud!" 
   localStorage.setItem("Highscores", seconds + " seconds")
 }
