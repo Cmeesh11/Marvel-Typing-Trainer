@@ -27,11 +27,6 @@ function startTrainingAvengers() {
       console.log(data);
       var text = data.Plot;
       container.innerHTML = "";
-      // If text length is less than 100 characters, add another description
-      while (text.length < 100) {
-        text +=
-          " " + data.data.results[Math.floor(Math.random() * 49)].description;
-      }
       // Styling textbox
       textBoxEl.setAttribute("class", "box has-text-centered");
       textBoxEl.setAttribute("style", "font-family: Courier New");
@@ -105,7 +100,7 @@ function doneTyping() {
 
 // Listens for comics button click
 startButton.addEventListener("click", function () {
-  // returns the promise to engText, then once fulfilled,
+  // returns the promise to text, then once fulfilled,
   // runs the interactiveText function to make the text interactive
   var text = startTraining();
   text.then((resp) => {
@@ -115,7 +110,7 @@ startButton.addEventListener("click", function () {
 
 // Listens for movies button click
 avengersButton.addEventListener("click", function () {
-  // returns the promise to engText, then once fulfilled,
+  // returns the promise to text, then once fulfilled,
   // runs the interactiveText function to make the text interactive
   var text = startTrainingAvengers();
   text.then((resp) => {

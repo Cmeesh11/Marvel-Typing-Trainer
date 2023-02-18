@@ -9,3 +9,9 @@ This typing trainer generates the user a paragraph of text that the user can int
 AS a programmer who wishes to improve their typing speed
 I WANT to benchmark my typing skills
 SO THAT I can improve my accuracy and words per minute
+
+
+## Credit
+
+omdbapi: https://www.omdbapi.com/
+Marvel Comics API: https://developer.marvel.com/
