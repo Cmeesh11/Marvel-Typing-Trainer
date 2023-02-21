@@ -10,6 +10,12 @@ AS a programmer who wishes to improve their typing speed
 I WANT to benchmark my typing skills
 SO THAT I can improve my accuracy and words per minute
 
+## Usage
+
+To start, choose whether you want to type passages based on the Marvel comics, or the Avengers movies. You should be redirected to a page with just a textbox.
+Start typing the passage, character by character, and each character will highlight either green for correct, or red for incorrect. If you make a mistake, you can use the backspace key.
+Once completed, enter your name into the input box, and the entry should now display on the highscores page.
+
 
 ## Credit
 
