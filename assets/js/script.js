@@ -96,13 +96,30 @@ function getAccuracy() {
   var accuracy = Math.round((correct.length / (index + 1)) * 100) + "%";
   return accuracy;
 }
+
+function displayAccuracy(){
+  var accuracyBox = document.createElement("div");
+  accuracyBox.className = "block has-text-centered";
+  setInterval(function(){
+    var acc = accuracyBox.textContent = "Accuracy" + accuracy}, 1000)
+    main.appendChild(accuracyBox)
+}
+
 //Function for the timer
 function startTimer() {
   count = setInterval(function () {
     seconds++;
   }, 1000);
 }
-
+//Function displays timer
+function displayTime() {
+  var timebox = document.createElement("div");
+  timebox.className = "block has-text-centered";
+  setInterval(function(){
+    count++;
+  var timecount = timebox.textContent = "Timer: " + count }, 1000)
+  main.appendChild(timebox)
+}
 // Loads highscores page
 function highScores() {
   // Clears existing content
@@ -192,6 +209,8 @@ startButton.addEventListener("click", function () {
   text.then((resp) => {
     interactiveText(resp);
     startTimer();
+    displayTime();
+    displayAccuracy();
   });
 });
 
@@ -203,6 +222,7 @@ avengersButton.addEventListener("click", function () {
   text.then((resp) => {
     interactiveText(resp);
     startTimer();
+    displayTime();
   });
 });
 
