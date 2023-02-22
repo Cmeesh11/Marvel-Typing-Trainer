@@ -96,15 +96,6 @@ function getAccuracy() {
   var accuracy = Math.round((correct.length / (index + 1)) * 100) + "%";
   return accuracy;
 }
-
-function displayAccuracy(){
-  var accuracyBox = document.createElement("div");
-  accuracyBox.className = "block has-text-centered";
-  setInterval(function(){
-    var acc = accuracyBox.textContent = "Accuracy" + accuracy}, 1000)
-    main.appendChild(accuracyBox)
-}
-
 //Function for the timer
 function startTimer() {
   count = setInterval(function () {
@@ -210,7 +201,6 @@ startButton.addEventListener("click", function () {
     interactiveText(resp);
     startTimer();
     displayTime();
-    displayAccuracy();
   });
 });
 
