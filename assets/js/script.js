@@ -3,8 +3,11 @@ var startButton = document.querySelector("#start-button");
 var body = document.querySelector("body");
 var container = document.querySelector("#container");
 var index;
+var accuracy;
 // Created Elements
 var textBoxEl = document.createElement("div");
+var accuracyButtonEl = document.createElement("button");
+var buttonText;
 
 var publicKey = "c80a5387467017b31f13477fc4481d74";
 
@@ -19,6 +22,8 @@ function startTraining() {
     .then((data) => {
       // Chooses a random description to display
       var text = data.data.results[Math.floor(Math.random() * 49)].description;
+      // Sets the button name
+      buttonText = document.createTextNode("Accuracy: ");
       // Clearing previous landing page HTML and replacing it with generated text
       container.innerHTML = "";
       // If text length is less than 500 characters, add another description
@@ -29,11 +34,20 @@ function startTraining() {
       // Styling textbox
       textBoxEl.setAttribute("class", "box has-text-centered");
       textBoxEl.setAttribute("style", "font-family: Courier New");
+      // Styling Button
+      accuracyButtonEl.appendChild(buttonText);
+      accuracyButtonEl.style.backgroundColor = "#D3D3D3";
+      accuracyButtonEl.style.position = "absolute";
+      accuracyButtonEl.style.bottom = 0;
+      accuracyButtonEl.style.right = "120px";
+      accuracyButtonEl.style.height = "50px";
+      accuracyButtonEl.style.width = "300px";
       // Setting textbox content to text
       text = text.replace(/â€™/g, "'");
       text = text.replace(/â€”/g, " ");
       // Appending textbox to body
       container.appendChild(textBoxEl);
+      container.appendChild(accuracyButtonEl);
       // Runs interactiveText function to make text interactive
       interactiveText(text);
     })
@@ -58,13 +72,17 @@ function interactiveText(textEl) {
 function getAccuracy() {
   // Selects all spans in textboxEl with class "correct"
   var correct = textBoxEl.querySelectorAll(".correct");
+  var num = correct / index;
+  console.log(index);
   // Compares index to correctly entered characters and returns a percent
-  var accuracy = (correct.length / index) * 100 + "%"
+  var accuracy = ((correct.length / (index+1)) * 100).toFixed(2) + "%"
+  console.log(accuracy);
   return accuracy;
 }
 
 // Ends the session
 function doneTyping() {
+  accuracyButtonEl.hidden = "hidden";
   textBoxEl.textContent = "Finished!"
   console.log("done!");
   
@@ -92,6 +110,9 @@ window.addEventListener("keypress", (event) => {
   if (index === passage.length - 1) {
     return doneTyping();
   }
+  accuracy = getAccuracy();
+  buttonText = document.createTextNode("Accuracy: " + accuracy);
+  accuracyButtonEl.replaceChildren(buttonText);
   index++;
 })
 
