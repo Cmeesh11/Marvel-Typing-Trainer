@@ -5,13 +5,16 @@ var scoresButton = document.querySelector("#scores-button");
 var body = document.querySelector("body");
 var main = document.querySelector("main");
 var container = document.querySelector("#container");
-var index;
 var count;
 var input;
 var seconds = 0;
-var scoreBox = document.querySelector("#scores");
-var scoreButton = document.querySelector("#score-button");
+var index;
+var accuracy;
+// Created Elements
 var textBoxEl = document.createElement("div");
+var accuracyButtonEl = document.createElement("button");
+var buttonText;
+
 var publicKey = "c80a5387467017b31f13477fc4481d74";
 var avengersMovies = [
   "The+Avengers",
@@ -55,6 +58,8 @@ function startTraining() {
     .then((data) => {
       // Chooses a random description to display
       var text = data.data.results[Math.floor(Math.random() * 49)].description;
+      // Sets the button name
+      buttonText = document.createTextNode("Accuracy: ");
       // Clearing previous landing page HTML and replacing it with generated text
       container.innerHTML = "";
       // If text length is less than 100 characters, add another description
@@ -65,11 +70,20 @@ function startTraining() {
       // Styling textbox
       textBoxEl.setAttribute("class", "box has-text-centered");
       textBoxEl.setAttribute("style", "font-family: Courier New");
+      // Styling Button
+      accuracyButtonEl.appendChild(buttonText);
+      accuracyButtonEl.style.backgroundColor = "#D3D3D3";
+      accuracyButtonEl.style.position = "absolute";
+      accuracyButtonEl.style.bottom = 0;
+      accuracyButtonEl.style.right = "120px";
+      accuracyButtonEl.style.height = "50px";
+      accuracyButtonEl.style.width = "300px";
       // Setting textbox content to text
       text = text.replace(/â€™/g, "'");
       text = text.replace(/â€”/g, " ");
       // Appending textbox to body
       container.appendChild(textBoxEl);
+      container.appendChild(accuracyButtonEl);
       return text;
     })
     .catch((error) => {
@@ -92,10 +106,12 @@ function interactiveText(textEl) {
 function getAccuracy() {
   // Selects all spans in textboxEl with class "correct"
   var correct = textBoxEl.querySelectorAll(".correct");
+  var num = correct / index;
   // Compares index to correctly entered characters and returns a percent
-  var accuracy = Math.round((correct.length / (index + 1)) * 100) + "%";
+  var accuracy = ((correct.length / (index+1)) * 100).toFixed(2) + "%"
   return accuracy;
 }
+
 //Function for the timer
 function startTimer() {
   count = setInterval(function () {
@@ -163,6 +179,7 @@ function highScores() {
 // stores the name, accuracy, and time in localStorage
 function doneTyping() {
   index = 0;
+  accuracyButtonEl.hidden = "hidden";
   // Changes font and shows results to user
   textBoxEl.setAttribute("style", "font-family: Verdana;");
   textBoxEl.textContent =
@@ -238,9 +255,11 @@ window.addEventListener("keypress", (event) => {
   if (index === passage.length - 1) {
     return doneTyping();
   }
-  if (textBoxEl != undefined) {
-    accuracy = getAccuracy();
-  }
+if (textBoxEl != undefined) {
+  accuracy = getAccuracy();
+  buttonText = document.createTextNode("Accuracy: " + accuracy);
+  accuracyButtonEl.replaceChildren(buttonText);
+}
   index++;
 });
 
