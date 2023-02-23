@@ -132,9 +132,7 @@ function startTimer() {
     seconds++;
     timebox.textContent = "Timer: " + seconds;
   }, 1000);
-  
-  
-  container.appendChild(timebox)
+  container.appendChild(timebox);
 }
 
 
