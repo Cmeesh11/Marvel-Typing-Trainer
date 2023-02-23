@@ -99,18 +99,16 @@ function getAccuracy() {
 //Function for the timer
 function startTimer() {
   count = setInterval(function () {
+    timebox.textContent = "Timer: " + seconds;
+    timebox.className = "block has-text-centered";
     seconds++;
   }, 1000);
-}
-//Function displays timer
-function displayTime() {
   var timebox = document.createElement("div");
-  timebox.className = "block has-text-centered";
-  setInterval(function(){
-    count++;
-  var timecount = timebox.textContent = "Timer: " + count }, 1000)
+  
   main.appendChild(timebox)
 }
+
+
 // Loads highscores page
 function highScores() {
   // Clears existing content
@@ -200,7 +198,6 @@ startButton.addEventListener("click", function () {
   text.then((resp) => {
     interactiveText(resp);
     startTimer();
-    displayTime();
   });
 });
 
@@ -212,7 +209,6 @@ avengersButton.addEventListener("click", function () {
   text.then((resp) => {
     interactiveText(resp);
     startTimer();
-    displayTime();
   });
 });
 
