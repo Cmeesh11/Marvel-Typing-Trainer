@@ -6,8 +6,10 @@ This typing trainer generates the user a paragraph of text that the user can int
 
 ## User Story
 
-AS a programmer who wishes to improve their typing speed
-I WANT to benchmark my typing skills
+AS a programmer who wishes to improve their typing speed  
+
+I WANT to benchmark my typing skills 
+
 SO THAT I can improve my accuracy and words per minute
 
 ## Usage
@@ -27,7 +29,9 @@ https://cmeesh11.github.io/Marvel-Typing-Trainer/
 
 ## Credit
 
-omdbapi: https://www.omdbapi.com/
-Marvel Comics API: https://developer.marvel.com/
+omdbapi: https://www.omdbapi.com/  
+
+Marvel Comics API: https://developer.marvel.com/  
+
 Marvel font: https://www.fontspace.com/marvel-font-f32182
 
