@@ -84,8 +84,7 @@ function startTraining() {
       // Appending textbox to body
       container.appendChild(textBoxEl);
       container.appendChild(accuracyButtonEl);
-      // Runs interactiveText function to make text interactive
-      interactiveText(text);
+      return text;
     })
     .catch((error) => {
       return console.error(error);
