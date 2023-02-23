@@ -100,12 +100,12 @@ function getAccuracy() {
 function startTimer() {
   count = setInterval(function () {
     timebox.textContent = "Timer: " + seconds;
-    timebox.className = "block has-text-centered";
+    timebox.className = "column has-text-centered";
     seconds++;
   }, 1000);
   var timebox = document.createElement("div");
   
-  main.appendChild(timebox)
+  container.appendChild(timebox)
 }
 
 
