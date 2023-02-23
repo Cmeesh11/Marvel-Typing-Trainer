@@ -118,6 +118,7 @@ function doneTyping() {
   
 }
 
+
 // Loads highscores page
 function highScores() {
   // Clears existing content
