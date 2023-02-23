@@ -17,7 +17,17 @@ Start typing the passage, character by character, and each character will highli
 Once completed, enter your name into the input box, and the entry should now display on the highscores page.
 
 
+## Image of Deployed Application
+
+![alt text](./assets/Images/Marvel-Typing_Trainer.png);
+
+## Link to Application
+
+https://cmeesh11.github.io/Marvel-Typing-Trainer/
+
 ## Credit
 
 omdbapi: https://www.omdbapi.com/
 Marvel Comics API: https://developer.marvel.com/
+Marvel font: https://www.fontspace.com/marvel-font-f32182
+
