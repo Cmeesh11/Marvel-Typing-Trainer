@@ -99,9 +99,15 @@ function getAccuracy() {
 //Function for the timer
 function startTimer() {
   count = setInterval(function () {
+    timebox.textContent = "Timer: " + seconds;
+    timebox.className = "block has-text-centered";
     seconds++;
   }, 1000);
+  var timebox = document.createElement("div");
+  
+  main.appendChild(timebox)
 }
+
 
 // Loads highscores page
 function highScores() {

@@ -2,6 +2,11 @@
   --footer-height: 25px;
 }
 
+@font-face {
+  font-family: marvelFont;
+  src: url(../fonts/MarvelRegular-Dj83.ttf);
+}
+
 html,
 body {
     height: 100%;
@@ -32,4 +37,8 @@ main {
 
 .incorrect {
   background-color: red;
+}
+
+#Title{
+  font-family: marvelFont;
 }
