@@ -13,6 +13,7 @@ var accuracy;
 // Created Elements
 var textBoxEl = document.createElement("div");
 var accuracyButtonEl = document.createElement("button");
+var timebox = document.createElement("div");
 var buttonText;
 
 var publicKey = "c80a5387467017b31f13477fc4481d74";
@@ -34,15 +35,27 @@ function startTrainingAvengers() {
     })
     .then((data) => {
       var text = data.Plot;
+      // Sets the button name
+      buttonText = document.createTextNode("Accuracy: ");
+      // Clear previous page
       container.innerHTML = "";
       // Styling textbox
       textBoxEl.setAttribute("class", "box has-text-centered");
       textBoxEl.setAttribute("style", "font-family: Courier New");
+      // Styling Button
+      accuracyButtonEl.appendChild(buttonText);
+      accuracyButtonEl.style.backgroundColor = "#D3D3D3";
+      accuracyButtonEl.style.position = "absolute";
+      accuracyButtonEl.style.bottom = 0;
+      accuracyButtonEl.style.right = "120px";
+      accuracyButtonEl.style.height = "50px";
+      accuracyButtonEl.style.width = "300px";
       // Setting textbox content to text
       text = text.replace(/â€™/g, "'");
       text = text.replace(/â€”/g, " ");
       // Appending textbox to body
       container.appendChild(textBoxEl);
+      container.appendChild(accuracyButtonEl);
       return text;
     });
 }
@@ -106,7 +119,6 @@ function interactiveText(textEl) {
 function getAccuracy() {
   // Selects all spans in textboxEl with class "correct"
   var correct = textBoxEl.querySelectorAll(".correct");
-  var num = correct / index;
   // Compares index to correctly entered characters and returns a percent
   var accuracy = ((correct.length / (index+1)) * 100).toFixed(2) + "%"
   return accuracy;
@@ -119,7 +131,7 @@ function startTimer() {
     timebox.className = "column has-text-centered";
     seconds++;
   }, 1000);
-  var timebox = document.createElement("div");
+  
   
   container.appendChild(timebox)
 }
@@ -180,6 +192,7 @@ function highScores() {
 function doneTyping() {
   index = 0;
   accuracyButtonEl.hidden = "hidden";
+  timebox.innerHTML = "";
   // Changes font and shows results to user
   textBoxEl.setAttribute("style", "font-family: Verdana;");
   textBoxEl.textContent =
