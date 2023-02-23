@@ -21,7 +21,9 @@ Once completed, enter your name into the input box, and the entry should now dis
 
 ## Image of Deployed Application
 
-![alt text](./assets/Images/Marvel-Typing_Trainer.png);
+![alt text](./assets/Images/Marvel-Typing_Trainer.png)  
+
+![alt text](./assets//Images/Marvel-Typing_Trainer-typing.png)
 
 ## Link to Application
 
