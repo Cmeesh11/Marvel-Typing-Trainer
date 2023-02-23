@@ -6,6 +6,7 @@ var body = document.querySelector("body");
 var main = document.querySelector("main");
 var container = document.querySelector("#container");
 var count;
+var input;
 var seconds = 0;
 var index;
 var accuracy;
@@ -74,7 +75,7 @@ function startTraining() {
       accuracyButtonEl.style.backgroundColor = "#D3D3D3";
       accuracyButtonEl.style.position = "absolute";
       accuracyButtonEl.style.bottom = 0;
-      accuracyButtonEl.style.right = "122px";
+      accuracyButtonEl.style.right = "120px";
       accuracyButtonEl.style.height = "50px";
       accuracyButtonEl.style.width = "300px";
       // Setting textbox content to text
@@ -111,6 +112,19 @@ function getAccuracy() {
   var accuracy = ((correct.length / (index+1)) * 100).toFixed(2) + "%"
   return accuracy;
 }
+
+//Function for the timer
+function startTimer() {
+  count = setInterval(function () {
+    timebox.textContent = "Timer: " + seconds;
+    timebox.className = "column has-text-centered";
+    seconds++;
+  }, 1000);
+  var timebox = document.createElement("div");
+  
+  container.appendChild(timebox)
+}
+
 
 // Loads highscores page
 function highScores() {
