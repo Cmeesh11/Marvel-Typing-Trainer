@@ -72,7 +72,7 @@ function startTraining() {
       accuracyButtonEl.style.backgroundColor = "#D3D3D3";
       accuracyButtonEl.style.position = "absolute";
       accuracyButtonEl.style.bottom = 0;
-      accuracyButtonEl.style.right = "120px";
+      accuracyButtonEl.style.right = "122px";
       accuracyButtonEl.style.height = "50px";
       accuracyButtonEl.style.width = "300px";
       // Setting textbox content to text
