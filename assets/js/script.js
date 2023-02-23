@@ -5,6 +5,8 @@ var scoresButton = document.querySelector("#scores-button");
 var body = document.querySelector("body");
 var main = document.querySelector("main");
 var container = document.querySelector("#container");
+var count;
+var seconds = 0;
 var index;
 var accuracy;
 // Created Elements
