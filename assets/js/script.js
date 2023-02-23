@@ -110,15 +110,6 @@ function getAccuracy() {
   return accuracy;
 }
 
-// Ends the session
-function doneTyping() {
-  accuracyButtonEl.hidden = "hidden";
-  textBoxEl.textContent = "Finished!"
-  console.log("done!");
-  
-}
-
-
 // Loads highscores page
 function highScores() {
   // Clears existing content
@@ -173,6 +164,7 @@ function highScores() {
 // stores the name, accuracy, and time in localStorage
 function doneTyping() {
   index = 0;
+  accuracyButtonEl.hidden = "hidden";
   // Changes font and shows results to user
   textBoxEl.setAttribute("style", "font-family: Verdana;");
   textBoxEl.textContent =
