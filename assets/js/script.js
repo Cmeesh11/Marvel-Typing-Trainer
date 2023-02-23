@@ -126,10 +126,11 @@ function getAccuracy() {
 
 //Function for the timer
 function startTimer() {
+  timebox.textContent = "Timer: " + seconds;
+  timebox.className = "column has-text-centered";
   count = setInterval(function () {
-    timebox.textContent = "Timer: " + seconds;
-    timebox.className = "column has-text-centered";
     seconds++;
+    timebox.textContent = "Timer: " + seconds;
   }, 1000);
   
   
