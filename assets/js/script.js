@@ -26,7 +26,7 @@ var avengersMovies = [
 
 function startTrainingAvengers() {
   return fetch(
-    "http://www.omdbapi.com/?apikey=6961e40c&t=" +
+    "https://www.omdbapi.com/?apikey=6961e40c&t=" +
       avengersMovies[Math.floor(Math.random() * 4)] +
       "&type=movie&plot=full"
   )
